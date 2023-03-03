@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 import json
 import requests
 from googletrans import Translator
+import base64
 
 user_routes = Blueprint('user_routes', __name__)
 
@@ -104,3 +105,10 @@ def t_en():
     translator = Translator()
     output = translator.translate(request_body['texto'], dest='en').text
     return jsonify({'text': output})
+
+@user_routes.route('/img', methods=['GET'])
+def prueba():
+    response = requests.get("https://content5.fwwgo.com/ftvgirls.com/6653/04.jpg");
+    base64EncodedStr = base64.b64encode(response.content)
+    print(base64EncodedStr)
+    return "data:image/jpeg;base64,"+str(base64EncodedStr)
