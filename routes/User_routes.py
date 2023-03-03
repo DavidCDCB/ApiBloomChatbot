@@ -112,3 +112,9 @@ def prueba():
     base64EncodedStr = base64.b64encode(response.content)
     print(base64EncodedStr)
     return "data:image/jpeg;base64,"+str(base64EncodedStr)
+
+
+@user_routes.route('/clima/<id>', methods=['GET'])
+def clima(id):
+    response = requests.get(f"http://mipronostico.ideam.gov.co/IdeamWebApp2/Ideam/getData/reverse/reverse.php?cod={id}");
+    return response.json()
